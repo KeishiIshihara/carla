@@ -13,8 +13,8 @@ class ConfigAutopilot:
         # WAYPOINT ----- TRAJECTORY CONFIGURATION
 
         dir_path = os.path.dirname(__file__)
-        self.city_file = dir_path + '/../planner/' + city_name + '.txt'
-        self.city_map_file = dir_path + '/../planner/' + city_name + '.png'
+        self.city_file = dir_path + '/../planner/' + str(city_name) + '.txt'
+        self.city_map_file = dir_path + '/../planner/' + str(city_name) + '.png'
         self.city_name = city_name
 
 

@@ -4,6 +4,7 @@ Rosbridge class:
 Class that handle communication between CARLA and ROS
 """
 import random
+from itertools import count
 
 from rosgraph_msgs.msg import Clock
 from tf2_msgs.msg import TFMessage
@@ -13,6 +14,7 @@ from carla.settings import CarlaSettings
 from carla_ros_bridge.control import InputController
 from carla_ros_bridge.markers import PlayerAgentHandler, NonPlayerAgentsHandler
 from carla_ros_bridge.sensors import CameraHandler, LidarHandler
+from carla_ros_bridge.map import MapHandler
 
 
 class CarlaRosBridge(object):
@@ -27,6 +29,7 @@ class CarlaRosBridge(object):
         :param rate: rate to query data from carla in Hz
         """
         self.setup_carla_client(client=client, params=params)
+        self.frames_per_episode = params['Framesperepisode']
 
         self.tf_to_publish = []
         self.msgs_to_publish = []
@@ -136,8 +139,15 @@ class CarlaRosBridge(object):
         number_of_player_starts = len(scene.player_start_spots)
         player_start = random.randint(0, max(0, number_of_player_starts - 1))
 
+        # Send occupancy grid to rivz
+        map_handler = MapHandler(scene.map_name)
+        map_handler.send_map()
+
         self.client.start_episode(player_start)
-        while not (rospy.is_shutdown()):
+
+        for frame in count():
+            if (frame == self.frames_per_episode) or rospy.is_shutdown():
+                break
             measurements, sensor_data = self.client.read_data()
 
             # handle time

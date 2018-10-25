@@ -110,6 +110,16 @@ class LidarHandler(SensorHandler):
         t.transform = carla_transform_to_ros_transform(
             self.carla_object.get_transform())
 
+        # for some reasons lidar sends already rotated cloud,
+        # so it is need to ignore pitch and roll
+        r = t.transform.rotation
+        quat = [r.x, r.y, r.z, r.w]
+        roll, pitch, yaw = tf.transformations.euler_from_quaternion(quat)
+        quat = tf.transformations.quaternion_from_euler(0, 0, yaw)
+        t.transform.rotation.x = quat[0]
+        t.transform.rotation.y = quat[1]
+        t.transform.rotation.z = quat[2]
+        t.transform.rotation.w = quat[3]
         self.process_msg_fun('tf', t)
 
 
@@ -186,12 +196,12 @@ class CameraHandler(SensorHandler):
 
         rotation = t.transform.rotation
         quat = [rotation.x, rotation.y, rotation.z, rotation.w]
-        roll, pitch, yaw = tf.transformations.euler_from_quaternion(quat)
-
-        roll -= math.pi / 2.0
-        yaw -= math.pi / 2.0
-
-        quat = tf.transformations.quaternion_from_euler(roll, pitch, yaw)
+        quat_swap = tf.transformations.quaternion_from_matrix(
+            [[0, 0, 1, 0],
+            [-1, 0, 0, 0],
+            [0, -1, 0, 0],
+            [0, 0, 0, 1]])
+        quat = tf.transformations.quaternion_multiply(quat, quat_swap)
 
         t.transform.rotation.x = quat[0]
         t.transform.rotation.y = quat[1]

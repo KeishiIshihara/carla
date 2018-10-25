@@ -2,6 +2,7 @@ Dist
 Doxygen
 PythonClient/dist
 Util/Build
+.vscode
 
 *.VC.db
 *.VC.opendb

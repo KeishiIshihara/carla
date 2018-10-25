@@ -66,8 +66,12 @@ from carla.util import print_over_same_line
 
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
+#WINDOW_WIDTH = 5000
+#WINDOW_HEIGHT = 3000
 MINI_WINDOW_WIDTH = 320
 MINI_WINDOW_HEIGHT = 180
+#MINI_WINDOW_WIDTH = 500
+#MINI_WINDOW_HEIGHT = 300
 
 
 def make_carla_settings(args):

@@ -84,6 +84,7 @@ def make_carla_settings(args):
     camera0 = sensor.Camera('CameraRGB')
     camera0.set_image_size(WINDOW_WIDTH, WINDOW_HEIGHT)
     camera0.set_position(2.0, 0.0, 1.4)
+    # camera0.set_position(200, 0, 140)
     camera0.set_rotation(0.0, 0.0, 0.0)
     settings.add_sensor(camera0)
     camera1 = sensor.Camera('CameraDepth', PostProcessing='Depth')

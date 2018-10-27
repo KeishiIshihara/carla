@@ -25,7 +25,8 @@ from carla.util import print_over_same_line
 def run_carla_client(args):
     # Here we will run 3 episodes with 300 frames each.
     number_of_episodes = 3
-    frames_per_episode = 300
+    # frames_per_episode = 300
+    frames_per_episode = 600
 
     # We assume the CARLA server is already waiting for a client to connect at
     # host:port. To create a connection we can use the `make_carla_client`
@@ -151,7 +152,8 @@ def run_carla_client(args):
                     # will add some noise to the steer.
 
                     control = measurements.player_measurements.autopilot_control
-                    control.steer += random.uniform(-0.1, 0.1)
+                    print(control)
+                    # control.steer += random.uniform(-0.1, 0.1)
                     client.send_control(control)
 
 

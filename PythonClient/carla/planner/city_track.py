@@ -117,6 +117,22 @@ class CityTrack(object):
         return sorted(distance)[0]
 
 
+    # add
+    def get_distance_closest_node_turn(self, pos):
+        return self._map.get_distance_closest_node(pos)
+
+        # import collections
+        # # from carla.planner import graph
+        # # from carla.planner.graph import *
+
+        # distance = []
+        # for node_iter in self.graph.turn_nodes():
+        # # for node_iter in graph.turn_nodes():
+        #     distance.append(sldist(node_iter, pos))
+
+        # return sorted(distance)[0]
+
+
     def _closest_intersection_position(self, current_node):
 
         distance_vector = []

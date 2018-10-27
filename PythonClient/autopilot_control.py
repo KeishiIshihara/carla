@@ -87,17 +87,20 @@ def make_carla_settings():
     settings.randomize_seeds()
     camera0 = sensor.Camera('CameraRGB')
     camera0.set_image_size(WINDOW_WIDTH, WINDOW_HEIGHT)
-    camera0.set_position(200, 0, 140)
+    # camera0.set_position(200, 0, 140)
+    camera0.set_position(2.0, 0, 1.4)
     camera0.set_rotation(0.0, 0.0, 0.0)
     settings.add_sensor(camera0)
     camera1 = sensor.Camera('CameraDepth', PostProcessing='Depth')
     camera1.set_image_size(MINI_WINDOW_WIDTH, MINI_WINDOW_HEIGHT)
-    camera1.set_position(200, 0, 140)
+    # camera1.set_position(200, 0, 140)
+    camera0.set_position(2.0, 0, 1.4)
     camera1.set_rotation(0.0, 0.0, 0.0)
     settings.add_sensor(camera1)
     camera2 = sensor.Camera('CameraSemSeg', PostProcessing='SemanticSegmentation')
     camera2.set_image_size(MINI_WINDOW_WIDTH, MINI_WINDOW_HEIGHT)
-    camera2.set_position(200, 0, 140)
+    # camera2.set_position(200, 0, 140)
+    camera0.set_position(2.0, 0, 1.4)
     camera2.set_rotation(0.0, 0.0, 0.0)
     settings.add_sensor(camera2)
     return settings
@@ -185,11 +188,15 @@ class CarlaGame(object):
         self._timer.tick()
 
         measurements, sensor_data = self.client.read_data()
-
+        """
         self._main_image = sensor_data['CameraRGB']
         self._mini_view_image1 = sensor_data['CameraDepth']
         self._mini_view_image2 = sensor_data['CameraSemSeg']
-
+        """
+        self._main_image = sensor_data.get('CameraRGB', None)
+        self._mini_view_image1 = sensor_data.get('CameraDepth', None)
+        self._mini_view_image2 = sensor_data.get('CameraSemSeg', None)
+        
         # Print measurements every second.
         if self._timer.elapsed_seconds_since_lap() > 1.0:
             if self._city_name is not None:
@@ -218,6 +225,8 @@ class CarlaGame(object):
         # Get the control directly from the autopilot
         control = self._autopilot.run_step(measurements, None,
                                            self._player_target_transform)
+
+        print (control)
 
         if test_reach_goal(measurements.player_measurements.transform, self._player_target_transform ):
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3   #v0.7.0 -> 0.8.4
 
 # Copyright (c) 2017 Computer Vision Center (CVC) at the Universitat Autonoma de
 # Barcelona (UAB).
@@ -75,7 +75,7 @@ def test_reach_goal(player,goal):
         return False
 
 
-def make_carla_settings():
+def make_carla_settings(args):
     """Make a CarlaSettings object with the settings we need."""
     settings = CarlaSettings()
     settings.set(
@@ -83,24 +83,26 @@ def make_carla_settings():
         SendNonPlayerAgentsInfo=True,
         NumberOfVehicles=15,
         NumberOfPedestrians=30,
-        WeatherId=random.choice([1, 3, 7, 8, 14]))
+        WeatherId=random.choice([1, 3, 7, 8, 14]),
+        #QualityLevel=args.quality_level
+        )
     settings.randomize_seeds()
     camera0 = sensor.Camera('CameraRGB')
     camera0.set_image_size(WINDOW_WIDTH, WINDOW_HEIGHT)
     # camera0.set_position(200, 0, 140)
-    camera0.set_position(2.0, 0, 1.4)
+    camera0.set_position(2.0, 0.0, 1.4)
     camera0.set_rotation(0.0, 0.0, 0.0)
     settings.add_sensor(camera0)
     camera1 = sensor.Camera('CameraDepth', PostProcessing='Depth')
     camera1.set_image_size(MINI_WINDOW_WIDTH, MINI_WINDOW_HEIGHT)
     # camera1.set_position(200, 0, 140)
-    camera0.set_position(2.0, 0, 1.4)
+    camera1.set_position(2.0, 0.0, 1.4)
     camera1.set_rotation(0.0, 0.0, 0.0)
     settings.add_sensor(camera1)
     camera2 = sensor.Camera('CameraSemSeg', PostProcessing='SemanticSegmentation')
     camera2.set_image_size(MINI_WINDOW_WIDTH, MINI_WINDOW_HEIGHT)
     # camera2.set_position(200, 0, 140)
-    camera0.set_position(2.0, 0, 1.4)
+    camera2.set_position(2.0, 0.0, 1.4)
     camera2.set_rotation(0.0, 0.0, 0.0)
     settings.add_sensor(camera2)
     return settings
@@ -127,23 +129,35 @@ class Timer(object):
 
 
 class CarlaGame(object):
-    def __init__(self, carla_client, city_name=None):
+    # def __init__(self, carla_client, city_name=None):
+    def __init__(self, carla_client, args):
+        
+       
+        # self._city_name = city_name
+        # self._map = CarlaMap(city_name, 16.43, 50.0) if city_name is not None else None
+        # self._map_shape = self._map.map_image.shape if city_name is not None else None
+        # self._map_view = self._map.get_map(WINDOW_HEIGHT) if city_name is not None else None
+        self._player_target_transform = None
+
         self.client = carla_client
+        self._carla_settings = make_carla_settings(args)
         self._timer = None
         self._display = None
         self._main_image = None
         self._mini_view_image1 = None
         self._mini_view_image2 = None
+        self._enable_autopilot = args.autopilot
+        self._lidar_measurement = None
         self._map_view = None
         self._is_on_reverse = False
-        self._city_name = city_name
-        self._autopilot = Autopilot(ConfigAutopilot(city_name))
-        self._map = CarlaMap(city_name, 16.43, 50.0) if city_name is not None else None
-        self._map_shape = self._map.map_image.shape if city_name is not None else None
-        self._map_view = self._map.get_map(WINDOW_HEIGHT) if city_name is not None else None
+        self._display_map = args.map
+        self._city_name = None
+        self._autopilot = Autopilot(ConfigAutopilot(self._city_name)) 
+        self._map = None
+        self._map_shape = None
+        self._map_view = None
         self._position = None
         self._agent_positions = None
-        self._player_target_transform = None
 
     def execute(self):
         """Launch the PyGame."""
@@ -159,10 +173,30 @@ class CarlaGame(object):
         finally:
             pygame.quit()
 
+    # def _initialize_game(self):
+    #     if self._city_name is not None:
+    #         self._display = pygame.display.set_mode(
+    #             (WINDOW_WIDTH + int((WINDOW_HEIGHT/float(self._map.map_image.shape[0]))*self._map.map_image.shape[1]), WINDOW_HEIGHT),
+    #             pygame.HWSURFACE | pygame.DOUBLEBUF)
+    #     else:
+    #         self._display = pygame.display.set_mode(
+    #             (WINDOW_WIDTH, WINDOW_HEIGHT),
+    #             pygame.HWSURFACE | pygame.DOUBLEBUF)
+
+    #     logging.debug('pygame started')
+    #     self._on_new_episode()
+
     def _initialize_game(self):
+        self._on_new_episode()
+
         if self._city_name is not None:
+            self._map = CarlaMap(self._city_name)
+            self._map_shape = self._map.map_image.shape
+            self._map_view = self._map.get_map(WINDOW_HEIGHT)
+
+            extra_width = int((WINDOW_HEIGHT/float(self._map_shape[0]))*self._map_shape[1])
             self._display = pygame.display.set_mode(
-                (WINDOW_WIDTH + int((WINDOW_HEIGHT/float(self._map.map_image.shape[0]))*self._map.map_image.shape[1]), WINDOW_HEIGHT),
+                (WINDOW_WIDTH + extra_width, WINDOW_HEIGHT),
                 pygame.HWSURFACE | pygame.DOUBLEBUF)
         else:
             self._display = pygame.display.set_mode(
@@ -170,7 +204,6 @@ class CarlaGame(object):
                 pygame.HWSURFACE | pygame.DOUBLEBUF)
 
         logging.debug('pygame started')
-        self._on_new_episode()
 
     def _on_new_episode(self):
         scene = self.client.load_settings(make_carla_settings())
@@ -184,18 +217,39 @@ class CarlaGame(object):
         self._timer = Timer()
         self._is_on_reverse = False
 
+    def _on_new_episode(self):
+        self._carla_settings.randomize_seeds()
+        self._carla_settings.randomize_weather()
+        scene = self.client.load_settings(self._carla_settings)
+        if self._display_map:
+            self._city_name = scene.map_name
+        # number_of_player_starts = len(scene.player_start_spots)
+        # player_start = np.random.randint(number_of_player_starts)
+
+        start_target = np.random.randint(len(poses))
+        player_start = poses[start_target][0]
+        player_target = poses[start_target][1]
+        self._player_target_transform = scene.player_start_spots[player_target]
+
+        print('Starting new episode...')
+        self.client.start_episode(player_start)
+        self._timer = Timer()
+        self._is_on_reverse = False
+
     def _on_loop(self):
         self._timer.tick()
 
         measurements, sensor_data = self.client.read_data()
-        """
-        self._main_image = sensor_data['CameraRGB']
-        self._mini_view_image1 = sensor_data['CameraDepth']
-        self._mini_view_image2 = sensor_data['CameraSemSeg']
-        """
-        self._main_image = sensor_data.get('CameraRGB', None)
+
+        # self._main_image = sensor_data['CameraRGB']
+        # self._mini_view_image1 = sensor_data['CameraDepth']
+        # self._mini_view_image2 = sensor_data['CameraSemSeg']
+
+
+        elf._main_image = sensor_data.get('CameraRGB', None)
         self._mini_view_image1 = sensor_data.get('CameraDepth', None)
         self._mini_view_image2 = sensor_data.get('CameraSemSeg', None)
+        self._lidar_measurement = sensor_data.get('Lidar32', None)
         
         # Print measurements every second.
         if self._timer.elapsed_seconds_since_lap() > 1.0:
@@ -226,8 +280,6 @@ class CarlaGame(object):
         control = self._autopilot.run_step(measurements, None,
                                            self._player_target_transform)
 
-        print (control)
-
         if test_reach_goal(measurements.player_measurements.transform, self._player_target_transform ):
 
             self._autopilot.waypointer.reset()
@@ -244,6 +296,8 @@ class CarlaGame(object):
 
         if control is None:
             self._on_new_episode()
+        elif self._enable_autopilot:
+            self.client.send_control(measurements.player_measurements.autopilot_control)
         else:
             self.client.send_control(control)
 
@@ -264,7 +318,8 @@ class CarlaGame(object):
             ori_y=lane_orientation[1],
             step=self._timer.step,
             fps=self._timer.ticks_per_second(),
-            speed=player_measurements.forward_speed,
+            # speed=player_measurements.forward_speed,
+            speed=player_measurements.forward_speed * 3.6,
             other_lane=100 * player_measurements.intersection_otherlane,
             offroad=100 * player_measurements.intersection_offroad)
         print_over_same_line(message)
@@ -276,7 +331,8 @@ class CarlaGame(object):
         message = message.format(
             step=self._timer.step,
             fps=self._timer.ticks_per_second(),
-            speed=player_measurements.forward_speed,
+            # speed=player_measurements.forward_speed,
+            speed=player_measurements.forward_speed * 3.6,
             other_lane=100 * player_measurements.intersection_otherlane,
             offroad=100 * player_measurements.intersection_offroad)
         print_over_same_line(message)
@@ -303,9 +359,23 @@ class CarlaGame(object):
             self._display.blit(
                 surface, (2 * gap_x + MINI_WINDOW_WIDTH, mini_image_y))
 
+        if self._lidar_measurement is not None:
+            lidar_data = np.array(self._lidar_measurement.data[:, :2])
+            lidar_data *= 2.0
+            lidar_data += 100.0
+            lidar_data = np.fabs(lidar_data)
+            lidar_data = lidar_data.astype(np.int32)
+            lidar_data = np.reshape(lidar_data, (-1, 2))
+            #draw lidar
+            lidar_img_size = (200, 200, 3)
+            lidar_img = np.zeros(lidar_img_size)
+            lidar_img[tuple(lidar_data.T)] = (255, 255, 255)
+            surface = pygame.surfarray.make_surface(lidar_img)
+            self._display.blit(surface, (10, 10))
+
         if self._map_view is not None:
 
-            #array = self._map_view
+            # array = self._map_view
             array = self._autopilot.waypointer.get_debug_image(WINDOW_HEIGHT)
 
             array = array[:, :, :3]
@@ -354,10 +424,28 @@ def main():
         type=int,
         help='TCP port to listen to (default: 2000)')
     argparser.add_argument(
+        '-a', '--autopilot',
+        action='store_true',
+        help='enable autopilot')
+    argparser.add_argument(
+        '-l', '--lidar',
+        action='store_true',
+        help='enable Lidar')
+    argparser.add_argument(
+        '-q', '--quality-level',
+        choices=['Low', 'Epic'],
+        type=lambda s: s.title(),
+        default='Epic',
+        help='graphics quality level, a lower level makes the simulation run considerably faster')
+    argparser.add_argument(
         '-m', '--map-name',
         metavar='M',
         default=None,
         help='plot the map of the current city (needs to match active map in server, options: Town01 or Town02)')
+    #argparser.add_argument(
+    #    '-m', '--map',
+    #    action='store_true',
+    #    help='plot the map of the current city')
     args = argparser.parse_args()
 
     log_level = logging.DEBUG if args.debug else logging.INFO
@@ -372,6 +460,7 @@ def main():
 
             with make_carla_client(args.host, args.port) as client:
                 game = CarlaGame(client, args.map_name)
+                #game = CarlaGame(client, args)
                 game.execute()
                 break
 

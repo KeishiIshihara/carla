@@ -7,6 +7,7 @@ import numpy as np
 import rospy
 
 from ackermann_msgs.msg import AckermannDrive
+from sensor_msgs.msg import Joy
 
 
 class InputController(object):
@@ -29,6 +30,9 @@ class InputController(object):
 
         self.cmd_vel_subscriber = rospy.Subscriber(
             '/ackermann_cmd', AckermannDrive, self.set_control_cmd_callback)
+
+        # self.joy_subscriber = rospy.Subscriber(
+        #     '/joy_node', Joy, self.set_control_cmd_callback, callback_args=1)
 
     def set_control_cmd_callback(self, data):
         """
@@ -58,8 +62,12 @@ class InputController(object):
             rospy.logerr("Max speed reached, clipping value")
             speed_ctrl = np.clip(speed_ctrl, -max_speed, max_speed)
 
-        if speed_ctrl == 0:
-            control['brake'] = True
+        # if speed_ctrl == 0:
+        #     control['brake'] = True
+
+        # if data.jerk > 0.5:
+        
+        control['brake'] = data.jerk
 
         control['steer'] = steering_angle_ctrl / max_steering_angle
         control['throttle'] = abs(speed_ctrl / max_speed)

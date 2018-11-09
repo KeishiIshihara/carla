@@ -139,6 +139,9 @@ class CarlaRosBridge(object):
         self.client.start_episode(player_start)
         while not (rospy.is_shutdown()):
             measurements, sensor_data = self.client.read_data()
+            player_measurements = measurements.player_measurements
+            # speed=player_measurements.forward_speed * 3.6, # m/s -> km/h
+            print('current_speed: ' + str(player_measurements.forward_speed * 3.6))
 
             # handle time
             self.carla_game_stamp = measurements.game_timestamp

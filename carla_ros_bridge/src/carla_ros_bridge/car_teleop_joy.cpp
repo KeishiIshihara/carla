@@ -1,6 +1,7 @@
 #include <ros/ros.h>
 //#include <geometry_msgs/Twist.h>
 #include <sensor_msgs/Joy.h>
+#include <ackermann_msgs/AckermannDriveStamped.h>
 #include <ackermann_msgs/AckermannDrive.h>
 
 
@@ -19,6 +20,7 @@ private:
   int linear_, angular_;
   double l_scale_, a_scale_;
   ros::Publisher vel_pub_;
+  ros::Publisher stamped_vel_pub_;
   ros::Publisher pub_;
   ros::Subscriber joy_sub_;
 
@@ -40,6 +42,8 @@ TeleopVehicle::TeleopVehicle():
 
   vel_pub_ = nh_.advertise<ackermann_msgs::AckermannDrive>("ackermann_cmd", 1);
 
+  stamped_vel_pub_ = nh_.advertise<ackermann_msgs::AckermannDriveStamped>("ackermann_cmd_stamped", 1);
+
 
   joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("joy", 10, &TeleopVehicle::joyCallback, this);
 
@@ -54,7 +58,9 @@ void TeleopVehicle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
   twist.linear.x = l_scale_*joy->axes[linear_];
   vel_pub_.publish(twist);*/
 
+  ackermann_msgs::AckermannDriveStamped drive_stamped;
   ackermann_msgs::AckermannDrive drive;
+  drive_stamped.header.stamp = ros::Time::now();
 
   int gear_low = 12;
   int gear_second = 13;
@@ -78,6 +84,8 @@ void TeleopVehicle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
   // ROS_INFO("linear_:%d,  angular_:%d \n",linear_, angular_);
   //printf("a:%d + b:%d = %d\n",msg.a , msg.b, result );
   vel_pub_.publish(drive);
+  drive_stamped.drive = drive;
+  stamped_vel_pub_.publish(drive_stamped);
 }
 
 

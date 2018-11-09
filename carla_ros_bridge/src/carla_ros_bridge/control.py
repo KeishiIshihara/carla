@@ -6,7 +6,8 @@ import math
 import numpy as np
 import rospy
 
-from ackermann_msgs.msg import AckermannDrive
+# from ackermann_msgs.msg import AckermannDrive
+from ackermann_msgs.msg import AckermannDriveStamped
 from sensor_msgs.msg import Joy
 
 
@@ -28,22 +29,19 @@ class InputController(object):
             'reverse': False
         }
 
-        self.cmd_vel_subscriber = rospy.Subscriber(
-            '/ackermann_cmd', AckermannDrive, self.set_control_cmd_callback)
-
-        # self.joy_subscriber = rospy.Subscriber(
-        #     '/joy_node', Joy, self.set_control_cmd_callback, callback_args=1)
+        # self.cmd_vel_subscriber = rospy.Subscriber('/ackermann_cmd', AckermannDrive, self.set_control_cmd_callback)
+        self.cmd_vel_subscriber = rospy.Subscriber('/ackermann_cmd_stamped', AckermannDriveStamped, self.set_control_cmd_callback)
 
     def set_control_cmd_callback(self, data):
         """
         Convert a Ackerman drive msg into carla control msg
 
         Right now the control is really simple and don't enforce acceleration and jerk command, nor the steering acceleration too
-        :param data: AckermannDrive msg
+        :param data: AckermannDriveStamped msg
         :return:
         """
-        steering_angle_ctrl = data.steering_angle
-        speed_ctrl = data.speed
+        steering_angle_ctrl = data.drive.steering_angle
+        speed_ctrl = data.drive.speed
 
         max_steering_angle = math.radians(
             500
@@ -67,7 +65,7 @@ class InputController(object):
 
         # if data.jerk > 0.5:
         
-        control['brake'] = data.jerk
+        control['brake'] = data.drive.jerk
 
         control['steer'] = steering_angle_ctrl / max_steering_angle
         control['throttle'] = abs(speed_ctrl / max_speed)

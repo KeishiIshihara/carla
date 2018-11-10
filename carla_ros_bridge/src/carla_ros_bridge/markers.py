@@ -5,6 +5,7 @@ Classes to handle Agent object (player and non-player)
 from geometry_msgs.msg import TransformStamped
 from std_msgs.msg import Header
 from visualization_msgs.msg import MarkerArray, Marker
+from ../msg import PlayerMeasurementsStamped
 
 from carla.sensor import Transform as carla_Transform
 from carla_ros_bridge.transforms import carla_transform_to_ros_transform, ros_transform_to_pose
@@ -56,19 +57,37 @@ class PlayerAgentHandler(AgentObjectHandler):
         super(PlayerAgentHandler, self).__init__(name, **kwargs)
 
     def process_msg(self, data, cur_time):
+        #rostopic of /tf
         t = TransformStamped()
         t.header.stamp = cur_time
         t.header.frame_id = self.world_link
         t.child_frame_id = "base_link"
         t.transform = carla_transform_to_ros_transform(
             carla_Transform(data.transform))
+        #rostopic of /player_vihecle
         header = Header()
         header.stamp = cur_time
         header.frame_id = self.world_link
         marker = get_vehicle_marker(
-            data, header=header, marker_id=0, is_player=True)
+            data.player_measurements, header=header, marker_id=0, is_player=True)
+        #rostopic of /player_measurements
+        player_measurements = data.player_measurements
+        p = PlayerMeasurementsStamped()
+        p.header.stamp = cur_time
+        p.header.frame_id = self.world_link
+        p.measurements.position.x = player_measurements.transform.location.x
+        p.measurements.position.y = player_measurements.transform.location.y
+        p.measurements.speed = player_measurements.forward_speed * 3.6 # m/s -> km/h
+        p.measurements.collision.vehicles = player_measurements.collision_vehicles
+        p.measurements.collision.pedestrians = player_measurements.collision_pedestrians
+        p.measurements.collision.other = player_measurements.collision_other
+        p.measurements.intersection.offroad = 100 * player_measurements.intersection_otherlane
+        p.measurements.intersection.othelane = 100 * player_measurements.intersection_offroad
+        p.measurements.agents_num = len(data.non_player_agents)
+        #publish
         self.process_msg_fun(self.name, marker)
         self.process_msg_fun('tf', t)
+        self.process_msg_fun('player_measurements', p)
 
 
 class NonPlayerAgentsHandler(AgentObjectHandler):

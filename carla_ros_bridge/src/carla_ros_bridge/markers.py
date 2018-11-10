@@ -5,7 +5,7 @@ Classes to handle Agent object (player and non-player)
 from geometry_msgs.msg import TransformStamped
 from std_msgs.msg import Header
 from visualization_msgs.msg import MarkerArray, Marker
-from ../msg import PlayerMeasurementsStamped
+from carla_msgs.msg import PlayerMeasurementsStamped
 
 from carla.sensor import Transform as carla_Transform
 from carla_ros_bridge.transforms import carla_transform_to_ros_transform, ros_transform_to_pose
@@ -63,7 +63,9 @@ class PlayerAgentHandler(AgentObjectHandler):
         t.header.frame_id = self.world_link
         t.child_frame_id = "base_link"
         t.transform = carla_transform_to_ros_transform(
-            carla_Transform(data.transform))
+            # carla_Transform(data.transform)
+            carla_Transform(data.player_measurements.transform)
+            )
         #rostopic of /player_vihecle
         header = Header()
         header.stamp = cur_time

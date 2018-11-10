@@ -13,7 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   roscpp
   ackermann_msgs
-  message_generation
+  carla_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -50,15 +50,14 @@ catkin_python_setup()
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-add_message_files(
-  FILES
-  Position2D.msg
-  Collision.msg
-  Intersection.msg
-  PlayerMeasurements.msg
-  PlayerMeasurementsStamped.msg
-
-)
+#add_message_files(
+#  FILES
+#  Position2D.msg
+#  Collision.msg
+#  Intersection.msg
+#  PlayerMeasurements.msg
+#  PlayerMeasurementsStamped.msg
+#)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -75,11 +74,11 @@ add_message_files(
 # )
 
 ## Generate added messages and services with any dependencies listed here
-generate_messages(
-  DEPENDENCIES
-  sensor_msgs
-  std_msgs
-)
+#generate_messages(
+#  DEPENDENCIES
+#  sensor_msgs
+#  std_msgs
+#)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##

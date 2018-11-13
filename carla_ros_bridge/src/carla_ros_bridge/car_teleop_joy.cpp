@@ -6,10 +6,10 @@
 
 
 
-class TeleopVehicle
+class VehicleControl
 {
 public:
-  TeleopVehicle();
+  VehicleControl();
   
 
 private:
@@ -27,7 +27,7 @@ private:
 };
 
 
-TeleopVehicle::TeleopVehicle():
+VehicleControl::VehicleControl():
   linear_(1),
   angular_(2)
 {
@@ -45,33 +45,28 @@ TeleopVehicle::TeleopVehicle():
   stamped_vel_pub_ = nh_.advertise<ackermann_msgs::AckermannDriveStamped>("ackermann_cmd_stamped", 1);
 
 
-  joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("joy", 10, &TeleopVehicle::joyCallback, this);
-
-  //pub_ = nh_.advertise<>
+  joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("joy", 10, &VehicleControl::joyCallback, this);
 
 }
 
-void TeleopVehicle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
+void VehicleControl::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
 {
-  /*geometry_msgs::Twist twist;
-  twist.angular.z = a_scale_*joy->axes[angular_];
-  twist.linear.x = l_scale_*joy->axes[linear_];
-  vel_pub_.publish(twist);*/
-
   ackermann_msgs::AckermannDriveStamped drive_stamped;
   ackermann_msgs::AckermannDrive drive;
   drive_stamped.header.stamp = ros::Time::now();
 
+  // Shift config
   int gear_low = 12;
   int gear_second = 13;
   int gear_third = 14;
   int gear_reverse = 17;
-  
-  // drive.steering_angle = a_scale_*joy->axes[angular_];
-  // drive.speed = l_scale_*joy->axes[linear_];
 
+  //Initialize
   drive.speed = 0;
   drive.steering_angle = 0;
+
+  /*
+  //original coding
   if(joy->buttons[gear_low] == 1){
     drive.speed = l_scale_ * (joy->axes[linear_] + 1.0);
     drive.steering_angle = -1 * a_scale_ * joy->axes[angular_];
@@ -81,8 +76,29 @@ void TeleopVehicle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
     drive.steering_angle = -1 * a_scale_ * joy->axes[angular_];
   }
   drive.jerk = (joy->axes[3] + 1.0);
+  */
+
+  //Case:drive.speed == const 
+  drive.jerk = (joy->axes[3] + 1.0);
+  if(drive.jerk == 0){
+    if(joy->buttons[gear_low] == 1){
+      if((joy->axes[linear_] + 1.0) != 0){
+        drive.speed = 18.0;
+      }
+    }
+    if(joy->buttons[gear_reverse] == 1){
+      drive.speed = -1 * l_scale_ * (joy->axes[linear_] + 1.0);
+    }
+  }
+  drive.jerk = (joy->axes[3] + 1.0);
+  drive.steering_angle = -1 * a_scale_ * joy->axes[angular_];
+
+
+
+  // Debug
   // ROS_INFO("linear_:%d,  angular_:%d \n",linear_, angular_);
   //printf("a:%d + b:%d = %d\n",msg.a , msg.b, result );
+
   vel_pub_.publish(drive);
   drive_stamped.drive = drive;
   stamped_vel_pub_.publish(drive_stamped);
@@ -91,8 +107,8 @@ void TeleopVehicle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
 
 int main(int argc, char** argv)
 {
-  ros::init(argc, argv, "teleop_vehicle");
-  TeleopVehicle teleop_vehicle;
+  ros::init(argc, argv, "vehicle_control");
+  VehicleControl vehicle_control;
 
   ros::spin();
 }

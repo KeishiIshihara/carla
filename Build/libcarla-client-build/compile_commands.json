@@ -1,0 +1,169 @@
+[
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -O3 -DNDEBUG -o LibCarla/cmake/client/CMakeFiles/carla_client.dir/__/__/source/carla/client/Actor.cpp.o -c /home/aisl/carla/LibCarla/source/carla/client/Actor.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/client/Actor.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -O3 -DNDEBUG -o LibCarla/cmake/client/CMakeFiles/carla_client.dir/__/__/source/carla/client/ActorAttribute.cpp.o -c /home/aisl/carla/LibCarla/source/carla/client/ActorAttribute.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/client/ActorAttribute.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -O3 -DNDEBUG -o LibCarla/cmake/client/CMakeFiles/carla_client.dir/__/__/source/carla/client/ActorBlueprint.cpp.o -c /home/aisl/carla/LibCarla/source/carla/client/ActorBlueprint.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/client/ActorBlueprint.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -O3 -DNDEBUG -o LibCarla/cmake/client/CMakeFiles/carla_client.dir/__/__/source/carla/client/BlueprintLibrary.cpp.o -c /home/aisl/carla/LibCarla/source/carla/client/BlueprintLibrary.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/client/BlueprintLibrary.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -O3 -DNDEBUG -o LibCarla/cmake/client/CMakeFiles/carla_client.dir/__/__/source/carla/client/Client.cpp.o -c /home/aisl/carla/LibCarla/source/carla/client/Client.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/client/Client.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -O3 -DNDEBUG -o LibCarla/cmake/client/CMakeFiles/carla_client.dir/__/__/source/carla/client/Image.cpp.o -c /home/aisl/carla/LibCarla/source/carla/client/Image.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/client/Image.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -O3 -DNDEBUG -o LibCarla/cmake/client/CMakeFiles/carla_client.dir/__/__/source/carla/client/World.cpp.o -c /home/aisl/carla/LibCarla/source/carla/client/World.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/client/World.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -O3 -DNDEBUG -o LibCarla/cmake/client/CMakeFiles/carla_client.dir/__/__/source/carla/rpc/Server.cpp.o -c /home/aisl/carla/LibCarla/source/carla/rpc/Server.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/rpc/Server.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -O3 -DNDEBUG -o LibCarla/cmake/client/CMakeFiles/carla_client.dir/__/__/source/carla/streaming/detail/Dispatcher.cpp.o -c /home/aisl/carla/LibCarla/source/carla/streaming/detail/Dispatcher.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/streaming/detail/Dispatcher.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -O3 -DNDEBUG -o LibCarla/cmake/client/CMakeFiles/carla_client.dir/__/__/source/carla/streaming/detail/Token.cpp.o -c /home/aisl/carla/LibCarla/source/carla/streaming/detail/Token.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/streaming/detail/Token.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -O3 -DNDEBUG -o LibCarla/cmake/client/CMakeFiles/carla_client.dir/__/__/source/carla/streaming/detail/tcp/Client.cpp.o -c /home/aisl/carla/LibCarla/source/carla/streaming/detail/tcp/Client.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/streaming/detail/tcp/Client.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -O3 -DNDEBUG -o LibCarla/cmake/client/CMakeFiles/carla_client.dir/__/__/source/carla/streaming/detail/tcp/Server.cpp.o -c /home/aisl/carla/LibCarla/source/carla/streaming/detail/tcp/Server.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/streaming/detail/tcp/Server.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -O3 -DNDEBUG -o LibCarla/cmake/client/CMakeFiles/carla_client.dir/__/__/source/carla/streaming/detail/tcp/ServerSession.cpp.o -c /home/aisl/carla/LibCarla/source/carla/streaming/detail/tcp/ServerSession.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/streaming/detail/tcp/ServerSession.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -O3 -DNDEBUG -o LibCarla/cmake/client/CMakeFiles/carla_client.dir/__/__/source/carla/StringUtil.cpp.o -c /home/aisl/carla/LibCarla/source/carla/StringUtil.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/StringUtil.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ASIO_ENABLE_BUFFER_DEBUGGING -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -g -o LibCarla/cmake/client/CMakeFiles/carla_client_debug.dir/__/__/source/carla/client/Actor.cpp.o -c /home/aisl/carla/LibCarla/source/carla/client/Actor.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/client/Actor.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ASIO_ENABLE_BUFFER_DEBUGGING -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -g -o LibCarla/cmake/client/CMakeFiles/carla_client_debug.dir/__/__/source/carla/client/ActorAttribute.cpp.o -c /home/aisl/carla/LibCarla/source/carla/client/ActorAttribute.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/client/ActorAttribute.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ASIO_ENABLE_BUFFER_DEBUGGING -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -g -o LibCarla/cmake/client/CMakeFiles/carla_client_debug.dir/__/__/source/carla/client/ActorBlueprint.cpp.o -c /home/aisl/carla/LibCarla/source/carla/client/ActorBlueprint.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/client/ActorBlueprint.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ASIO_ENABLE_BUFFER_DEBUGGING -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -g -o LibCarla/cmake/client/CMakeFiles/carla_client_debug.dir/__/__/source/carla/client/BlueprintLibrary.cpp.o -c /home/aisl/carla/LibCarla/source/carla/client/BlueprintLibrary.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/client/BlueprintLibrary.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ASIO_ENABLE_BUFFER_DEBUGGING -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -g -o LibCarla/cmake/client/CMakeFiles/carla_client_debug.dir/__/__/source/carla/client/Client.cpp.o -c /home/aisl/carla/LibCarla/source/carla/client/Client.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/client/Client.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ASIO_ENABLE_BUFFER_DEBUGGING -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -g -o LibCarla/cmake/client/CMakeFiles/carla_client_debug.dir/__/__/source/carla/client/Image.cpp.o -c /home/aisl/carla/LibCarla/source/carla/client/Image.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/client/Image.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ASIO_ENABLE_BUFFER_DEBUGGING -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -g -o LibCarla/cmake/client/CMakeFiles/carla_client_debug.dir/__/__/source/carla/client/World.cpp.o -c /home/aisl/carla/LibCarla/source/carla/client/World.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/client/World.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ASIO_ENABLE_BUFFER_DEBUGGING -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -g -o LibCarla/cmake/client/CMakeFiles/carla_client_debug.dir/__/__/source/carla/rpc/Server.cpp.o -c /home/aisl/carla/LibCarla/source/carla/rpc/Server.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/rpc/Server.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ASIO_ENABLE_BUFFER_DEBUGGING -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -g -o LibCarla/cmake/client/CMakeFiles/carla_client_debug.dir/__/__/source/carla/streaming/detail/Dispatcher.cpp.o -c /home/aisl/carla/LibCarla/source/carla/streaming/detail/Dispatcher.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/streaming/detail/Dispatcher.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ASIO_ENABLE_BUFFER_DEBUGGING -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -g -o LibCarla/cmake/client/CMakeFiles/carla_client_debug.dir/__/__/source/carla/streaming/detail/Token.cpp.o -c /home/aisl/carla/LibCarla/source/carla/streaming/detail/Token.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/streaming/detail/Token.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ASIO_ENABLE_BUFFER_DEBUGGING -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -g -o LibCarla/cmake/client/CMakeFiles/carla_client_debug.dir/__/__/source/carla/streaming/detail/tcp/Client.cpp.o -c /home/aisl/carla/LibCarla/source/carla/streaming/detail/tcp/Client.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/streaming/detail/tcp/Client.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ASIO_ENABLE_BUFFER_DEBUGGING -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -g -o LibCarla/cmake/client/CMakeFiles/carla_client_debug.dir/__/__/source/carla/streaming/detail/tcp/Server.cpp.o -c /home/aisl/carla/LibCarla/source/carla/streaming/detail/tcp/Server.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/streaming/detail/tcp/Server.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ASIO_ENABLE_BUFFER_DEBUGGING -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -g -o LibCarla/cmake/client/CMakeFiles/carla_client_debug.dir/__/__/source/carla/streaming/detail/tcp/ServerSession.cpp.o -c /home/aisl/carla/LibCarla/source/carla/streaming/detail/tcp/ServerSession.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/streaming/detail/tcp/ServerSession.cpp"
+},
+
+{
+  "directory": "/home/aisl/carla/Build/libcarla-client-build",
+  "command": "/usr/bin/clang++-5.0  -DBOOST_ASIO_ENABLE_BUFFER_DEBUGGING -DBOOST_ERROR_CODE_HEADER_ONLY -I../../LibCarla/cmake/../source -I../boost-1.67.0-install/include -I../rpclib-2.2.1-libstdcxx-install/include   -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces -std=c++14 -pthread -fPIC -Werror -Wall -Wextra -Wno-missing-braces   -g -o LibCarla/cmake/client/CMakeFiles/carla_client_debug.dir/__/__/source/carla/StringUtil.cpp.o -c /home/aisl/carla/LibCarla/source/carla/StringUtil.cpp",
+  "file": "/home/aisl/carla/LibCarla/source/carla/StringUtil.cpp"
+}
+]

@@ -31,22 +31,16 @@ VehicleControl::VehicleControl():
   linear_(1),
   angular_(2)
 {
-
   nh_.param("axis_linear", linear_, linear_);
   nh_.param("axis_angular", angular_, angular_);
   nh_.param("scale_angular", a_scale_, a_scale_);
   nh_.param("scale_linear", l_scale_, l_scale_);
 
-  
-
-
   vel_pub_ = nh_.advertise<ackermann_msgs::AckermannDrive>("ackermann_cmd", 1);
 
   stamped_vel_pub_ = nh_.advertise<ackermann_msgs::AckermannDriveStamped>("ackermann_cmd_stamped", 1);
 
-
   joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("joy", 10, &VehicleControl::joyCallback, this);
-
 }
 
 void VehicleControl::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
@@ -62,8 +56,9 @@ void VehicleControl::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
   int gear_reverse = 17;
 
   //Initialize
-  drive.speed = 0;
-  drive.steering_angle = 0;
+  drive.speed = 0.;
+  drive.steering_angle = 0.;
+  drive.jerk = 0.;
 
   /*
   //original coding
@@ -83,14 +78,28 @@ void VehicleControl::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
   if(drive.jerk == 0){
     if(joy->buttons[gear_low] == 1){
       if((joy->axes[linear_] + 1.0) != 0){
-        drive.speed = 18.0;
+        drive.speed = 1 / 2.0 * (joy->axes[linear_] + 1.0);
+      }
+    }
+    if(joy->buttons[gear_second] == 1){
+      if((joy->axes[linear_] + 1.0) != 0){
+        drive.speed = 1 / 2.0 * (joy->axes[linear_] + 1.0) * 2;
+      }
+    }
+    if(joy->buttons[gear_third] == 1){
+      if((joy->axes[linear_] + 1.0) != 0){
+        drive.speed = 1 / 2.0 * (joy->axes[linear_] + 1.0) * 3;
       }
     }
     if(joy->buttons[gear_reverse] == 1){
-      drive.speed = -1 * l_scale_ * (joy->axes[linear_] + 1.0);
+      drive.speed = -1 / 2.0 * (joy->axes[linear_] + 1.0);
     }
   }
-  drive.jerk = (joy->axes[3] + 1.0);
+  if((joy->axes[3] + 1.0) > 1.0)
+    drive.jerk = 1.0;
+  else
+    drive.jerk = (joy->axes[3] + 1.0);
+
   drive.steering_angle = -1 * a_scale_ * joy->axes[angular_];
 
 

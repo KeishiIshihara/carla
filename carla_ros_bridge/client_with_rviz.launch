@@ -17,4 +17,6 @@
   <param name="scale_angular" value="10" type="double"/>
 
 <node pkg="carla_ros_bridge" type="car_teleop_joy" name="vehicle_control"/>
+<node pkg="carla_ros_bridge" name="calcdis_node" type="calc_drive_distance.py" output="screen"/>
+
 </launch>

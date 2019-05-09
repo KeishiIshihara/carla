@@ -41,7 +41,8 @@ class InputController(object):
         :return:
         """
         steering_angle_ctrl = data.drive.steering_angle
-        speed_ctrl = data.drive.speed
+        speed_ctrl = 18.0 * data.drive.speed # 18 is best
+        brake_ctrl = 0.
 
         max_steering_angle = math.radians(
             500
@@ -60,15 +61,15 @@ class InputController(object):
             rospy.logerr("Max speed reached, clipping value")
             speed_ctrl = np.clip(speed_ctrl, -max_speed, max_speed)
 
-        # if speed_ctrl == 0:
-        #     control['brake'] = True
-
-        # if data.jerk > 0.5:
-        
-        control['brake'] = data.drive.jerk
+        if data.drive.jerk > 1.0:
+            brake_ctrl = 1.0
+        else:
+            brake_ctrl = data.drive.jerk
 
         control['steer'] = steering_angle_ctrl / max_steering_angle
         control['throttle'] = abs(speed_ctrl / max_speed)
         control['reverse'] = True if speed_ctrl < 0 else False
+        control['brake'] = brake_ctrl
+
 
         self.cur_control = control
